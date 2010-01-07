@@ -26,7 +26,7 @@ if ($start_server) {
         exec(
             $start_server,
             "--port=$port",
-            qw(-- plackup -s AnyEvent::Server::Starter t/000_base-hello.psgi),
+            qw(-- plackup -s AnyEvent::Server::Starter t/000_basic-hello.psgi),
         );
         die "failed to launch server using start_server:$!";
     }
