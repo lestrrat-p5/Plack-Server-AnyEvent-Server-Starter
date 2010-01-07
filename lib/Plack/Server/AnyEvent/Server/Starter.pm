@@ -1,10 +1,9 @@
 
-package Plack::Server::AnyEvent::Server::Starter;
-use strict;
+package Plack::Server::AnyEvent::Server::Starter;use strict;
 use warnings;
 use base qw(Plack::Server::AnyEvent);
 use AnyEvent;
-use AnyEvent::Util qw(fh_nonblocking);
+use AnyEvent::Util qw(fh_nonblocking guard);
 use AnyEvent::Socket qw(format_address);
 use Server::Starter qw(server_ports);
 
@@ -19,11 +18,11 @@ sub _create_tcp_server {
         $self->{host} = $1;
         $self->{port} = $2;
     } else {
+        $self->{host} ||= '0.0.0.0';
         $self->{port} = $hostport;
     }
 
-    # /WE/ don't care what the address family, type of socket we got, just
-    # create a new handle, and perform a fdopen on it. So that part of
+    # /WE/ don't care what the address family, type of socket we got, just    # create a new handle, and perform a fdopen on it. So that part of
     # AE::Socket::tcp_server is stripped out
 
     my %state;
@@ -42,8 +41,8 @@ sub _create_tcp_server {
         while ($state{fh} && (my $peer = accept my $fh, $state{fh})) {
             fh_nonblocking $fh, 1; # POSIX requires inheritance, the outside world does not
 
-            my ($service, $self->{host}) = AnyEvent::Socket::unpack_sockaddr($peer);
-            $accept->($fh, format_address $self->{host}, $self->{port});
+            my ($service, $host) = AnyEvent::Socket::unpack_sockaddr($peer);
+            $accept->($fh, format_address $host, $service);
         }
     };
 
