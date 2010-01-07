@@ -1,10 +1,12 @@
 
-package Plack::Server::AnyEvent::Server::Starter;use strict;
+package Plack::Server::AnyEvent::Server::Starter;
+use strict;
 use warnings;
 use base qw(Plack::Server::AnyEvent);
 use AnyEvent;
 use AnyEvent::Util qw(fh_nonblocking guard);
 use AnyEvent::Socket qw(format_address);
+use IO::Socket::INET;
 use Server::Starter qw(server_ports);
 
 # Server::Starter requires us to perform fdopen on a descriptor NAME...
@@ -53,3 +55,37 @@ sub _create_tcp_server {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Plack::Server::AnyEvent::Server::Starter - Use AnyEvent-Based Plack Apps From Server::Starter
+
+=head1 SYNOPSIS
+
+   % start_server --port=80 -- plackup -s AnyEvent::Server::Starter
+
+=head1 DESCRIPTION
+
+Plack::Server::AnyEvent::Server::Starter is a wrapper to manage L<PLack::Server::AnyEvent> using L<Server::Starter>.
+
+=head1 SEE ALSO
+
+L<Server::Starter>
+L<Plack::Server::AnyEvent>
+L<Plack::Server::Standalone::Prefork::Server::Starter>
+
+=head1 AUTHOR
+
+Daisuke Maki
+
+Much code stolen from AnyEvent 5.24 (by Marc Lehman), and Server::Starter SYNOPSIS (Kazuho Oku)
+
+=head1 LICENSE
+
+This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
+
+See L<http://www.perl.com/perl/misc/Artistic.html>
+
+=cut
