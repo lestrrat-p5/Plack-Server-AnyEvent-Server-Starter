@@ -9,6 +9,8 @@ use AnyEvent::Socket qw(format_address);
 use IO::Socket::INET;
 use Server::Starter qw(server_ports);
 
+our $VERSION = '0.00001';
+
 # Server::Starter requires us to perform fdopen on a descriptor NAME...
 # that's what we do here
 # This code is stolen from AnyEvent-5.24 AnyEvent::Socket::tcp_server
@@ -68,7 +70,7 @@ Plack::Server::AnyEvent::Server::Starter - Use AnyEvent-Based Plack Apps From Se
 
 =head1 DESCRIPTION
 
-Plack::Server::AnyEvent::Server::Starter is a wrapper to manage L<PLack::Server::AnyEvent> using L<Server::Starter>.
+Plack::Server::AnyEvent::Server::Starter is a wrapper to manage L<Plack::Server::AnyEvent> using L<Server::Starter>. Use this module when, for example, you want to run a L<Tatsumaki> app (which is AnyEvent based) via L<Server::Starter>.
 
 =head1 SEE ALSO
 
