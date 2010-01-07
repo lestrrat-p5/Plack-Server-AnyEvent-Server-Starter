@@ -2,6 +2,8 @@ use inc::Module::Install;
 
 name 'Plack-Server-AnyEvent-Server-Starter';
 
+all_from 'lib/Plack/Server/AnyEvent/Server/Starter.pm';
+
 requires 'AnyEvent';
 requires 'AnyEvent::Socket';
 requires 'AnyEvent::Util';
