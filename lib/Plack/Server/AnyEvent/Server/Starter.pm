@@ -9,7 +9,7 @@ use AnyEvent::Socket qw(format_address);
 use IO::Socket::INET;
 use Server::Starter qw(server_ports);
 
-our $VERSION = '0.00001';
+our $VERSION = '0.00002';
 
 # Server::Starter requires us to perform fdopen on a descriptor NAME...
 # that's what we do here
